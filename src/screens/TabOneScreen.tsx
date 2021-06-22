@@ -1,10 +1,10 @@
-import * as React from 'react'
+import React from 'react'
 import { StyleSheet } from 'react-native'
 
-import EditScreenInfo from '../components/EditScreenInfo'
-import { Text, View } from '../components/Themed'
+import EditScreenInfo from 'src/components/EditScreenInfo'
+import { Text, View } from 'src/components/Themed'
 
-export default function TabOneScreen() {
+const TabOneScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Tab One</Text>
@@ -13,6 +13,8 @@ export default function TabOneScreen() {
     </View>
   )
 }
+
+export default TabOneScreen
 
 const styles = StyleSheet.create({
   container: {

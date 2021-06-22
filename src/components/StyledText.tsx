@@ -1,7 +1,8 @@
-import * as React from 'react'
+import React, { FC } from 'react'
 
-import { Text, TextProps } from './Themed'
+import { Text, TextProps } from 'src/components/Themed'
 
-export function MonoText(props: TextProps) {
-  return <Text {...props} style={[props.style, { fontFamily: 'space-mono' }]} />
+export const MonoText: FC<TextProps> = (props) => {
+  const { style, ...other } = props
+  return <Text {...other} style={[style, { fontFamily: 'space-mono' }]} />
 }

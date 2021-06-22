@@ -1,13 +1,13 @@
 import 'react-native-gesture-handler'
-import { StatusBar } from 'expo-status-bar'
 import React from 'react'
+import { StatusBar } from 'expo-status-bar'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
+import Navigation from 'src/navigation'
 import useCachedResources from 'src/hooks/useCachedResources'
 import useColorScheme from 'src/hooks/useColorScheme'
-import Navigation from 'src/navigation'
 
-export default function App() {
+const App = () => {
   const isLoadingComplete = useCachedResources()
   const colorScheme = useColorScheme()
 
@@ -21,3 +21,5 @@ export default function App() {
     </SafeAreaProvider>
   )
 }
+
+export default App

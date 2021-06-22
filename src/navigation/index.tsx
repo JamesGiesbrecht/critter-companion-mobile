@@ -1,19 +1,18 @@
-/**
- * If you are not familiar with React Navigation, check out the "Fundamentals" guide:
- * https://reactnavigation.org/docs/getting-started
- *
- */
+import React, { FC } from 'react'
+import { ColorSchemeName } from 'react-native'
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import * as React from 'react'
-import { ColorSchemeName } from 'react-native'
 
-import NotFoundScreen from '../screens/NotFoundScreen'
-import { RootStackParamList } from '../types'
-import BottomTabNavigator from './BottomTabNavigator'
-import LinkingConfiguration from './LinkingConfiguration'
+import NotFoundScreen from 'src/screens/NotFoundScreen'
+import { RootStackParamList } from 'src/types'
+import BottomTabNavigator from 'src/navigation/BottomTabNavigator'
+import LinkingConfiguration from 'src/navigation/LinkingConfiguration'
 
-export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+interface Props {
+  colorScheme: ColorSchemeName
+}
+
+const Navigation: FC<Props> = ({ colorScheme }) => {
   return (
     <NavigationContainer
       linking={LinkingConfiguration}
@@ -27,7 +26,7 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
 // Read more here: https://reactnavigation.org/docs/modal
 const Stack = createStackNavigator<RootStackParamList>()
 
-function RootNavigator() {
+const RootNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Root" component={BottomTabNavigator} />
@@ -35,3 +34,5 @@ function RootNavigator() {
     </Stack.Navigator>
   )
 }
+
+export default Navigation
