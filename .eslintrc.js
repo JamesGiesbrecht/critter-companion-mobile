@@ -12,7 +12,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:jest/recommended',
-    // 'prettier',
+    'prettier',
   ],
   globals: {
     Atomics: 'readonly',
@@ -35,17 +35,16 @@ module.exports = {
     project: './tsconfig.json',
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-    '@typescript-eslint',
-    'jest',
-    // 'prettier'
-  ],
+  plugins: ['react', '@typescript-eslint', 'jest', 'prettier'],
   rules: {
     'import/extensions': 'off',
+    'import/prefer-default-export': 'off',
     // 'no-shadow': 'off',
     // '@typescript-eslint/no-shadow': 'error',
     // 'no-underscore-dangle': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-unsafe-call': 'off',
+    '@typescript-eslint/no-unsafe-member-access': 'off',
     // 'no-unused-vars': 'off',
     // '@typescript-eslint/no-unused-vars': 'warn',
     'no-use-before-define': 'off',
@@ -59,17 +58,16 @@ module.exports = {
     'react/jsx-filename-extension': ['warn', { extensions: ['.jsx', '.tsx'] }],
     'react/jsx-props-no-spreading': 'off',
     'react/no-unescaped-entities': 'off',
-    // 'react/react-in-jsx-scope': 'off',
-    // 'prettier/prettier': [
-    //   'warn',
-    //   {
-    //     jsxBracketSameLine: true,
-    //     singleQuote: true,
-    //     trailingComma: 'all',
-    //     printWidth: 100,
-    //     semi: false,
-    //   },
-    // ],
+    'prettier/prettier': [
+      'warn',
+      {
+        jsxBracketSameLine: true,
+        singleQuote: true,
+        trailingComma: 'all',
+        printWidth: 100,
+        semi: false,
+      },
+    ],
   },
   settings: {
     'import/resolver': {
