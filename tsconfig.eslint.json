@@ -2,7 +2,6 @@
   "extends": "./tsconfig.json",
   "include": [
     "src",
-    "App.tsx",
     ".eslintrc.js",
     "babel.config.js",
   ]
