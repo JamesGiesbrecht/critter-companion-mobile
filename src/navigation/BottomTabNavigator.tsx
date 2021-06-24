@@ -7,7 +7,7 @@ import Colors from 'src/constants/Colors'
 import useColorScheme from 'src/hooks/useColorScheme'
 import TabOneScreen from 'src/screens/TabOneScreen'
 import TabTwoScreen from 'src/screens/TabTwoScreen'
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from 'src/types'
+import { BottomTabParamList, TabOneParamList, TabTwoParamList } from 'src/typescript/types'
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>()
 

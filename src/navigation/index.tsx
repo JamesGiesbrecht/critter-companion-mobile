@@ -3,10 +3,8 @@ import { ColorSchemeName } from 'react-native'
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import NotFoundScreen from 'src/screens/NotFoundScreen'
-import { RootStackParamList } from 'src/types'
-import BottomTabNavigator from 'src/navigation/BottomTabNavigator'
-import LinkingConfiguration from 'src/navigation/LinkingConfiguration'
+import { RootStackParamList } from 'src/typescript/types'
+import DrawerNavigator from 'src/navigation/DrawerNavigator'
 
 interface Props {
   colorScheme: ColorSchemeName
@@ -14,9 +12,7 @@ interface Props {
 
 const Navigation: FC<Props> = ({ colorScheme }) => {
   return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <NavigationContainer theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <RootNavigator />
     </NavigationContainer>
   )
@@ -29,8 +25,7 @@ const Stack = createStackNavigator<RootStackParamList>()
 const RootNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Root" component={BottomTabNavigator} />
-      <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+      <Stack.Screen name="Root" component={DrawerNavigator} />
     </Stack.Navigator>
   )
 }
