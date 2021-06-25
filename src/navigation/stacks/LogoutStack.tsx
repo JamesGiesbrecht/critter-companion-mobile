@@ -12,7 +12,7 @@ const LogoutStack = () => (
       name="Logout"
       component={LogoutScreen}
       options={({ navigation }) => ({
-        headerLeft: () => <MenuButton navigation={navigation} />,
+        headerLeft: () => <MenuButton onPress={navigation.toggleDrawer} />,
       })}
     />
   </Stack.Navigator>

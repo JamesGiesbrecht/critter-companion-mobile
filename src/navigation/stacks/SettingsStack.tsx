@@ -12,7 +12,7 @@ const SettingsStack = () => (
       name="Settings"
       component={SettingsScreen}
       options={({ navigation }) => ({
-        headerLeft: () => <MenuButton navigation={navigation} />,
+        headerLeft: () => <MenuButton onPress={navigation.toggleDrawer} />,
       })}
     />
   </Stack.Navigator>
