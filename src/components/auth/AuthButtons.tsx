@@ -4,6 +4,7 @@ import { Button, Icon } from 'react-native-elements'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import Centered from 'src/components/ui/Centered'
+import useTheme from 'src/hooks/useTheme'
 
 interface Props {
   type: 'signIn' | 'signUp'
@@ -11,6 +12,7 @@ interface Props {
 
 const AuthButtons: FC<Props> = ({ type }) => {
   const insets = useSafeAreaInsets()
+  const theme = useTheme()
   const [buttonType, setButtonType] = useState(type)
   const handleLogInWithApple = () => console.log('Logging in with Apple')
   const handleLogInWithGoogle = () => console.log('Logging in with Google')
@@ -48,9 +50,16 @@ const AuthButtons: FC<Props> = ({ type }) => {
         />
         <Button
           containerStyle={styles.button}
-          buttonStyle={{ backgroundColor: '#388e3c' }}
+          buttonStyle={{ backgroundColor: theme.primary }}
           title={getButtonText('Email')}
           icon={<Icon iconStyle={styles.buttonIcon} name="ios-mail" type="ionicon" />}
+          onPress={handleLogInWithEmail}
+        />
+        <Button
+          containerStyle={styles.button}
+          buttonStyle={{ backgroundColor: theme.secondary }}
+          titleStyle={{ color: 'black' }}
+          title="Use an offline account"
           onPress={handleLogInWithEmail}
         />
       </Centered>
