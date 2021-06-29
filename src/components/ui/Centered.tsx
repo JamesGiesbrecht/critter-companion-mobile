@@ -1,13 +1,21 @@
-import React, { ReactNode, FC } from 'react'
-import { StyleSheet } from 'react-native'
+import React, { FC } from 'react'
+import { StyleSheet, View as RnView } from 'react-native'
 
-import { View } from 'src/components/Themed'
+import { View as ThemedView, ViewProps } from 'src/components/Themed'
 
-interface Props {
-  children: ReactNode
+interface Props extends ViewProps {
+  defaultView?: boolean
 }
 
-const Centered: FC<Props> = ({ children }) => <View style={styles.screen}>{children}</View>
+const Centered: FC<Props> = (props) => {
+  const { defaultView, children, style, ...other } = props
+  const View = defaultView ? RnView : ThemedView
+  return (
+    <View style={[styles.screen, style]} {...other}>
+      {children}
+    </View>
+  )
+}
 
 const styles = StyleSheet.create({
   screen: {
