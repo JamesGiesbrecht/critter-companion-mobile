@@ -11,7 +11,12 @@ const LoginScreen = () => {
       source={backgroundImage}
       style={styles.backgroundImage}
       imageStyle={{ resizeMode: 'repeat' }}>
-      <AuthButtons type="signUp" />
+      <AuthButtons
+        type="signUp"
+        onSubmit={() => {
+          console.log('Submitting')
+        }}
+      />
     </ImageBackground>
   )
 }

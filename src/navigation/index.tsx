@@ -3,8 +3,9 @@ import { ColorSchemeName } from 'react-native'
 import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
-import { RootStackParamList } from 'src/typescript/types'
 import DrawerNavigator from 'src/navigation/DrawerNavigator'
+import { RootStackParamList } from 'src/typescript/types'
+import LoginStack from 'src/navigation/stacks/LoginStack'
 
 interface Props {
   colorScheme: ColorSchemeName
@@ -25,7 +26,7 @@ const Stack = createStackNavigator<RootStackParamList>()
 const RootNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Root" component={DrawerNavigator} />
+      <Stack.Screen name="Root" component={true ? LoginStack : DrawerNavigator} />
     </Stack.Navigator>
   )
 }

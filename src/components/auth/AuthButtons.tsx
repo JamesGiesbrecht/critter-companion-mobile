@@ -8,16 +8,34 @@ import useTheme from 'src/hooks/useTheme'
 
 interface Props {
   type: 'signIn' | 'signUp'
+  onSubmit: () => void
 }
 
-const AuthButtons: FC<Props> = ({ type }) => {
+const AuthButtons: FC<Props> = ({ type, onSubmit }) => {
   const insets = useSafeAreaInsets()
   const theme = useTheme()
   const [buttonType, setButtonType] = useState(type)
-  const handleLogInWithApple = () => console.log('Logging in with Apple')
-  const handleLogInWithGoogle = () => console.log('Logging in with Google')
-  const handleLogInWithFacebook = () => console.log('Logging in with Facebook')
-  const handleLogInWithEmail = () => console.log('Logging in with Email')
+
+  const handleLogInWithApple = () => {
+    console.log('Logging in with Apple')
+    onSubmit()
+  }
+  const handleLogInWithGoogle = () => {
+    console.log('Logging in with Google')
+    onSubmit()
+  }
+  const handleLogInWithFacebook = () => {
+    console.log('Logging in with Facebook')
+    onSubmit()
+  }
+  const handleLogInWithEmail = () => {
+    console.log('Logging in with Email')
+    onSubmit()
+  }
+  const handleOfflineAccount = () => {
+    console.log('Offline Account')
+    onSubmit()
+  }
 
   const handleToggleType = () => setButtonType((prev) => (prev === 'signIn' ? 'signUp' : 'signIn'))
 
@@ -60,7 +78,7 @@ const AuthButtons: FC<Props> = ({ type }) => {
           buttonStyle={{ backgroundColor: theme.secondary }}
           titleStyle={{ color: 'black' }}
           title="Use an offline account"
-          onPress={handleLogInWithEmail}
+          onPress={handleOfflineAccount}
         />
       </Centered>
       <Button
