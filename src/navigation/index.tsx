@@ -4,8 +4,9 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { createStackNavigator } from '@react-navigation/stack'
 
 import DrawerNavigator from 'src/navigation/DrawerNavigator'
-import { RootStackParamList } from 'src/typescript/types'
 import LoginStack from 'src/navigation/stacks/LoginStack'
+import useStore from 'src/store'
+import { RootStackParamList } from 'src/typescript/types'
 
 interface Props {
   colorScheme: ColorSchemeName
@@ -24,9 +25,11 @@ const Navigation: FC<Props> = ({ colorScheme }) => {
 const Stack = createStackNavigator<RootStackParamList>()
 
 const RootNavigator = () => {
+  const accountType = useStore((state) => state.accountType)
+
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Root" component={true ? LoginStack : DrawerNavigator} />
+      <Stack.Screen name="Root" component={accountType === null ? LoginStack : DrawerNavigator} />
     </Stack.Navigator>
   )
 }

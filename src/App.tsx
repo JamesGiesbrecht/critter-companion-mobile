@@ -1,5 +1,6 @@
 import 'react-native-gesture-handler'
 import React from 'react'
+import AppLoading from 'expo-app-loading'
 import { StatusBar } from 'expo-status-bar'
 import { ThemeProvider } from 'react-native-elements'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
@@ -14,7 +15,7 @@ const App = () => {
   const colorScheme = useColorScheme()
 
   if (!isLoadingComplete) {
-    return null
+    return <AppLoading />
   }
   return (
     <SafeAreaProvider>

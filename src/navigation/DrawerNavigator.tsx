@@ -1,20 +1,37 @@
 import React from 'react'
-import { createDrawerNavigator } from '@react-navigation/drawer'
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+  DrawerItem,
+} from '@react-navigation/drawer'
 
-import LogoutStack from 'src/navigation/stacks/LogoutStack'
-import SettingsStack from 'src/navigation/stacks/SettingsStack'
 import CritterBottomTabNavigator from 'src/navigation/CrittersBottomTabNavigator'
-import LoginStack from 'src/navigation/stacks/LoginStack'
+import SettingsStack from 'src/navigation/stacks/SettingsStack'
+import useStore from 'src/store'
+import { AccountType } from 'src/typescript/enums'
 
 const Drawer = createDrawerNavigator()
 
-const DrawerNavigator = () => (
-  <Drawer.Navigator>
-    <Drawer.Screen name="Critters" component={CritterBottomTabNavigator} />
-    <Drawer.Screen name="Settings" component={SettingsStack} />
-    <Drawer.Screen name="Logout" component={LogoutStack} />
-    <Drawer.Screen name="Login" component={LoginStack} />
-  </Drawer.Navigator>
-)
+const DrawerNavigator = () => {
+  const accountType = useStore((state) => state.accountType)
+  const setAccountType = useStore((state) => state.setAccountType)
+
+  return (
+    <Drawer.Navigator
+      drawerContent={(props) => (
+        <DrawerContentScrollView {...props}>
+          <DrawerItemList {...props} />
+          <DrawerItem
+            label={accountType === AccountType.ONLINE_ACCOUNT ? 'Logout' : 'Sign In'}
+            onPress={() => setAccountType(null)}
+          />
+        </DrawerContentScrollView>
+      )}>
+      <Drawer.Screen name="Critters" component={CritterBottomTabNavigator} />
+      <Drawer.Screen name="Settings" component={SettingsStack} />
+    </Drawer.Navigator>
+  )
+}
 
 export default DrawerNavigator

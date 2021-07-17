@@ -1,0 +1,4 @@
+export enum AccountType {
+  LOCAL_ACCOUNT = 'LOCAL_ACCOUNT',
+  ONLINE_ACCOUNT = 'ONLINE_ACCOUNT',
+}

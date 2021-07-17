@@ -5,6 +5,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import Centered from 'src/components/ui/Centered'
 import useTheme from 'src/hooks/useTheme'
+import { AccountType } from 'src/typescript/enums'
+import useStore from 'src/store'
 
 interface Props {
   type: 'signIn' | 'signUp'
@@ -15,25 +17,26 @@ const AuthButtons: FC<Props> = ({ type, onSubmit }) => {
   const insets = useSafeAreaInsets()
   const theme = useTheme()
   const [buttonType, setButtonType] = useState(type)
+  const setAccountType = useStore((state) => state.setAccountType)
 
   const handleLogInWithApple = () => {
-    console.log('Logging in with Apple')
+    setAccountType(AccountType.ONLINE_ACCOUNT)
     onSubmit()
   }
   const handleLogInWithGoogle = () => {
-    console.log('Logging in with Google')
+    setAccountType(AccountType.ONLINE_ACCOUNT)
     onSubmit()
   }
   const handleLogInWithFacebook = () => {
-    console.log('Logging in with Facebook')
+    setAccountType(AccountType.ONLINE_ACCOUNT)
     onSubmit()
   }
   const handleLogInWithEmail = () => {
-    console.log('Logging in with Email')
+    setAccountType(AccountType.ONLINE_ACCOUNT)
     onSubmit()
   }
   const handleOfflineAccount = () => {
-    console.log('Offline Account')
+    setAccountType(AccountType.LOCAL_ACCOUNT)
     onSubmit()
   }
 
