@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, ImageBackground } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 import AuthButtons from 'src/components/auth/AuthButtons'
 import useStore from 'src/store'
@@ -8,6 +9,8 @@ const backgroundImage = require('src/assets/images/background.png')
 
 const LoginScreen = () => {
   const accountType = useStore((state) => state.accountType)
+  const navigation = useNavigation()
+
   return (
     <ImageBackground
       source={backgroundImage}
@@ -17,6 +20,7 @@ const LoginScreen = () => {
         type="signUp"
         onSubmit={() => {
           console.log('Submitting Login', accountType)
+          navigation.navigate('Root')
         }}
       />
     </ImageBackground>

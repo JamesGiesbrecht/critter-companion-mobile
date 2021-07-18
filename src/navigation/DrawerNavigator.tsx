@@ -5,6 +5,7 @@ import {
   DrawerItemList,
   DrawerItem,
 } from '@react-navigation/drawer'
+import { useNavigation } from '@react-navigation/native'
 
 import CritterBottomTabNavigator from 'src/navigation/CrittersBottomTabNavigator'
 import SettingsStack from 'src/navigation/stacks/SettingsStack'
@@ -14,8 +15,14 @@ import { AccountType } from 'src/typescript/enums'
 const Drawer = createDrawerNavigator()
 
 const DrawerNavigator = () => {
+  const navigation = useNavigation()
   const accountType = useStore((state) => state.accountType)
   const setAccountType = useStore((state) => state.setAccountType)
+
+  const handleLogout = () => {
+    setAccountType(null)
+    navigation.navigate('Login')
+  }
 
   return (
     <Drawer.Navigator
@@ -24,7 +31,7 @@ const DrawerNavigator = () => {
           <DrawerItemList {...props} />
           <DrawerItem
             label={accountType === AccountType.ONLINE_ACCOUNT ? 'Logout' : 'Sign In'}
-            onPress={() => setAccountType(null)}
+            onPress={handleLogout}
           />
         </DrawerContentScrollView>
       )}>

@@ -6,7 +6,6 @@ import { createStackNavigator } from '@react-navigation/stack'
 import DrawerNavigator from 'src/navigation/DrawerNavigator'
 import LoginStack from 'src/navigation/stacks/LoginStack'
 import useStore from 'src/store'
-import { RootStackParamList } from 'src/typescript/types'
 
 interface Props {
   colorScheme: ColorSchemeName
@@ -22,14 +21,16 @@ const Navigation: FC<Props> = ({ colorScheme }) => {
 
 // A root stack navigator is often used for displaying modals on top of all other content
 // Read more here: https://reactnavigation.org/docs/modal
-const Stack = createStackNavigator<RootStackParamList>()
+const Stack = createStackNavigator()
 
 const RootNavigator = () => {
   const accountType = useStore((state) => state.accountType)
-
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Root" component={accountType === null ? LoginStack : DrawerNavigator} />
+    <Stack.Navigator
+      initialRouteName={accountType === null ? 'Login' : 'Root'}
+      screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Login" component={LoginStack} />
+      <Stack.Screen name="Root" component={DrawerNavigator} />
     </Stack.Navigator>
   )
 }
