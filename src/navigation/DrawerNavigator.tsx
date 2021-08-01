@@ -21,7 +21,7 @@ const DrawerNavigator = () => {
 
   const handleLogout = () => {
     setAccountType(null)
-    navigation.navigate('Login')
+    navigation.navigate('Auth')
   }
 
   return (

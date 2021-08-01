@@ -4,7 +4,7 @@ import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/
 import { createStackNavigator } from '@react-navigation/stack'
 
 import DrawerNavigator from 'src/navigation/DrawerNavigator'
-import LoginStack from 'src/navigation/stacks/LoginStack'
+import AuthStack from 'src/navigation/stacks/AuthStack'
 import useStore from 'src/store'
 
 interface Props {
@@ -27,9 +27,9 @@ const RootNavigator = () => {
   const accountType = useStore((state) => state.accountType)
   return (
     <Stack.Navigator
-      initialRouteName={accountType === null ? 'Login' : 'Root'}
+      initialRouteName={accountType === null ? 'Auth' : 'Root'}
       screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Login" component={LoginStack} />
+      <Stack.Screen name="Auth" component={AuthStack} />
       <Stack.Screen name="Root" component={DrawerNavigator} />
     </Stack.Navigator>
   )

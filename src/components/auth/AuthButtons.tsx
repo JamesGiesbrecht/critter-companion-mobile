@@ -7,6 +7,7 @@ import Centered from 'src/components/ui/Centered'
 import useTheme from 'src/hooks/useTheme'
 import { AccountType } from 'src/typescript/enums'
 import useStore from 'src/store'
+import { useNavigation } from '@react-navigation/native'
 
 interface Props {
   type: 'signIn' | 'signUp'
@@ -16,7 +17,8 @@ interface Props {
 const AuthButtons: FC<Props> = ({ type, onSubmit }) => {
   const insets = useSafeAreaInsets()
   const theme = useTheme()
-  const [buttonType, setButtonType] = useState(type)
+  const navigation = useNavigation()
+  const [buttonType, setButtonType] = useState<Props['type']>(type)
   const setAccountType = useStore((state) => state.setAccountType)
 
   const handleLogInWithApple = () => {
@@ -33,7 +35,7 @@ const AuthButtons: FC<Props> = ({ type, onSubmit }) => {
   }
   const handleLogInWithEmail = () => {
     setAccountType(AccountType.ONLINE_ACCOUNT)
-    onSubmit()
+    navigation.navigate('Email')
   }
   const handleOfflineAccount = () => {
     setAccountType(AccountType.LOCAL_ACCOUNT)
