@@ -1,19 +1,19 @@
 import React, { FC, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import { Button, Icon } from 'react-native-elements'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import Centered from 'src/components/ui/Centered'
 import useTheme from 'src/hooks/useTheme'
-import { AccountType } from 'src/typescript/enums'
+import { AccountType, FormType } from 'src/typescript/enums'
 import useStore from 'src/store'
-import { useNavigation } from '@react-navigation/native'
 
 const LoginScreen: FC = () => {
   const insets = useSafeAreaInsets()
   const theme = useTheme()
   const navigation = useNavigation()
-  const [buttonType, setButtonType] = useState<'signIn' | 'signUp'>('signUp')
+  const [buttonType, setButtonType] = useState<FormType>(FormType.SignUp)
   const accountType = useStore((state) => state.accountType)
   const setAccountType = useStore((state) => state.setAccountType)
 
@@ -43,10 +43,11 @@ const LoginScreen: FC = () => {
     onSubmit()
   }
 
-  const handleToggleType = () => setButtonType((prev) => (prev === 'signIn' ? 'signUp' : 'signIn'))
+  const handleToggleType = () =>
+    setButtonType((prev) => (prev === FormType.Login ? FormType.SignUp : FormType.Login))
 
   const getButtonText = (provider: string) =>
-    `${buttonType === 'signIn' ? 'Sign in' : 'Sign up'} with ${provider}`
+    `${buttonType === FormType.Login ? 'Sign in' : 'Sign up'} with ${provider}`
 
   return (
     <View style={styles.screen}>
@@ -92,7 +93,7 @@ const LoginScreen: FC = () => {
         buttonStyle={[styles.button, { backgroundColor: 'white' }]}
         titleStyle={{ color: 'black' }}
         title={
-          buttonType === 'signIn'
+          buttonType === FormType.Login
             ? "Don't have an account? Sign Up."
             : 'Already have an account? Sign In.'
         }

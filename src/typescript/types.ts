@@ -1,7 +1,6 @@
-/**
- * Learn more about using TypeScript with React Navigation:
- * https://reactnavigation.org/docs/typescript/
- */
+import { ReactNode } from 'react'
+import { TextInputProps } from 'react-native'
+import { FormType } from 'src/typescript/enums'
 
 export type RootStackParamList = {
   Root: undefined
@@ -11,6 +10,37 @@ export type RootStackParamList = {
 export type AuthStackParamList = {
   Login: undefined
   Email: {
-    type: 'signIn' | 'signUp'
+    type: FormType
   }
+}
+
+export type InputValidation = {
+  required?: boolean
+  email?: boolean
+  min?: number
+  max?: number
+  minLength?: number
+  maxLength?: number
+  matches?: {
+    name: string
+    value?: string | boolean
+    label?: string
+  }
+  after?: ReactNode
+}
+
+export type Input = {
+  label: string
+  validation: InputValidation
+  error?: string
+  touched?: boolean
+  inputProps: TextInputProps
+}
+
+export type InputCollection = { [name: string]: Input }
+
+export type FormState = {
+  inputs: InputCollection
+  type?: FormType
+  formIsValid: boolean
 }

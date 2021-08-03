@@ -42,6 +42,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'no-void': ['error', { allowAsStatement: true }],
     'no-shadow': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/no-shadow': 'error',
     '@typescript-eslint/no-empty-function': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
