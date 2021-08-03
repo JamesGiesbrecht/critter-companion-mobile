@@ -1,6 +1,6 @@
 import React from 'react'
 import { ImageBackground } from 'react-native'
-import { createStackNavigator } from '@react-navigation/stack'
+import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/stack'
 
 import EmailScreen from 'src/screens/auth/EmailScreen'
 import LoginScreen from 'src/screens/auth/LoginScreen'
@@ -15,7 +15,11 @@ const AuthStack = () => (
     style={{ flex: 1 }}
     imageStyle={{ resizeMode: 'repeat' }}>
     <Stack.Navigator
-      screenOptions={{ cardStyle: { backgroundColor: 'transparent' }, headerShown: false }}>
+      screenOptions={{
+        cardStyle: { backgroundColor: 'transparent' },
+        headerShown: false,
+        cardStyleInterpolator: CardStyleInterpolators.forScaleFromCenterAndroid,
+      }}>
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Email" component={EmailScreen} />
     </Stack.Navigator>
