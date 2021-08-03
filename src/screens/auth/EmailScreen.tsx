@@ -1,7 +1,7 @@
 import { RouteProp, useNavigation } from '@react-navigation/native'
 import React, { FC } from 'react'
-import { StyleSheet, View as DefaultView, KeyboardAvoidingView } from 'react-native'
-import { Input, Card, Text, Button } from 'react-native-elements'
+import { StyleSheet, KeyboardAvoidingView } from 'react-native'
+import { Card, Text, Button } from 'react-native-elements'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Form from 'src/components/common/Form'
 
@@ -84,7 +84,6 @@ const EmailScreen: FC<Props> = ({ route }) => {
                 ? emailInputs
                 : { email: emailInputs.email, password: emailInputs.password }
             }
-            type={type}
             onSubmit={handleSubmit}
           />
           <Button

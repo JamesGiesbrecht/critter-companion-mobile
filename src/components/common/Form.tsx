@@ -1,15 +1,14 @@
-import React, { FC, Fragment, ReactNode, useEffect, useReducer } from 'react'
+import React, { FC, Fragment, ReactNode, useReducer } from 'react'
 import { Keyboard } from 'react-native'
 import { Input as InputElement, Button, ButtonProps } from 'react-native-elements'
 
-import { FormActionType, FormType } from 'src/typescript/enums'
+import { FormActionType } from 'src/typescript/enums'
 import { Input, InputCollection, FormState } from 'src/typescript/types'
 
 interface Props {
   children?: ReactNode
   inputs: InputCollection
   submitButtonProps: ButtonProps
-  type?: FormType
   onSubmit: (state: FormState) => void
 }
 interface FormAction {
@@ -128,19 +127,12 @@ const formReducer = (state: FormState, action: FormAction) => {
   }
 }
 
-const Form: FC<Props> = ({ children, inputs, submitButtonProps, type, onSubmit }) => {
+const Form: FC<Props> = ({ children, inputs, submitButtonProps, onSubmit }) => {
   const initialFormState: FormState = {
     inputs,
-    type,
     formIsValid: false,
   }
   const [formState, formDispatch] = useReducer(formReducer, initialFormState)
-
-  useEffect(() => {
-    if (type && type !== formState.type) {
-      formDispatch({ type: FormActionType.InitializeForm, payload: { inputs, formType: type } })
-    }
-  }, [type, formState.type, inputs])
 
   const handleSubmit = () => {
     Keyboard.dismiss()
