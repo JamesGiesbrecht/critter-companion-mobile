@@ -67,7 +67,10 @@ const formReducer = (state: FormState, action: FormAction) => {
         ...inputs,
         [action.payload.inputName]: {
           ...input,
-          value: action.payload.value,
+          inputProps: {
+            ...input.inputProps,
+            value: action.payload.value,
+          },
           error: validateInput(input, action.payload.value),
         },
       }
@@ -102,7 +105,6 @@ const formReducer = (state: FormState, action: FormAction) => {
     }
     case FormActionType.ValidateForm: {
       const updatedInputs: InputCollection = {}
-      let firstInvalidInput: string | null = null
       const formValidityState = Object.keys(inputs).map((name) => {
         const input = inputs[name]
         const error = validateInput(input)
@@ -112,9 +114,6 @@ const formReducer = (state: FormState, action: FormAction) => {
           error,
         }
         const isValid = error === ''
-        if (!isValid && !firstInvalidInput) {
-          firstInvalidInput = name
-        }
         return isValid
       })
       const formIsValid = formValidityState.every((isValid) => isValid)
@@ -158,7 +157,7 @@ const Form: FC<Props> = ({ children, inputs, submitButtonProps, type, onSubmit }
       <Fragment key={name}>
         <InputElement
           placeholder={input.label}
-          secureTextEntry={input.autoCompleteType === 'password'}
+          secureTextEntry={input.inputProps.autoCompleteType === 'password'}
           errorMessage={inputError}
           value={input.inputProps.value || ''}
           onChange={(e) =>

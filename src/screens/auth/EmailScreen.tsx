@@ -21,6 +21,7 @@ export const emailInputs: InputCollection = {
     inputProps: {
       autoCompleteType: 'email',
       textContentType: 'emailAddress',
+      autoCapitalize: 'none',
       value: '',
     },
     validation: {
@@ -62,6 +63,7 @@ const EmailScreen: FC<Props> = ({ route }) => {
 
   const handleSubmit = () => {
     console.log('Submitting Email')
+    navigation.navigate('Root')
   }
 
   return (
