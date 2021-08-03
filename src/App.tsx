@@ -19,7 +19,7 @@ const App = () => {
   }
   return (
     <SafeAreaProvider>
-      <ThemeProvider theme={theme} useDark={colorScheme === 'dark'}>
+      <ThemeProvider theme={theme}>
         <Navigation colorScheme={colorScheme} />
         <StatusBar />
       </ThemeProvider>
