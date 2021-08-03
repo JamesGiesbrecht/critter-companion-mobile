@@ -5,9 +5,10 @@ import { StatusBar } from 'expo-status-bar'
 import { ThemeProvider } from 'react-native-elements'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 
-import Navigation from 'src/navigation'
+import { AuthContextProvider } from 'src/context/Auth'
 import useCachedResources from 'src/hooks/useCachedResources'
 import useColorScheme from 'src/hooks/useColorScheme'
+import Navigation from 'src/navigation'
 import theme from 'src/styles/theme'
 
 const App = () => {
@@ -20,7 +21,9 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <ThemeProvider theme={theme}>
-        <Navigation colorScheme={colorScheme} />
+        <AuthContextProvider>
+          <Navigation colorScheme={colorScheme} />
+        </AuthContextProvider>
         <StatusBar />
       </ThemeProvider>
     </SafeAreaProvider>

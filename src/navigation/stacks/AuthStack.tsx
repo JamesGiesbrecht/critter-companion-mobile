@@ -4,10 +4,11 @@ import { createStackNavigator, CardStyleInterpolators } from '@react-navigation/
 
 import EmailScreen from 'src/screens/auth/EmailScreen'
 import LoginScreen from 'src/screens/auth/LoginScreen'
+import { AuthStackParamList } from 'src/typescript/types'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const backgroundImage = require('src/assets/images/background.png')
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator<AuthStackParamList>()
 
 const AuthStack = () => (
   <ImageBackground
