@@ -36,8 +36,6 @@
         "backgroundColor": "#ffffff"
       }
     },
-    "web": {
-      "favicon": "./src/assets/images/favicon.png"
-    }
+    "plugins": ["@react-native-firebase/app"]
   }
 }
