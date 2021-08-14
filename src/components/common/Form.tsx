@@ -151,6 +151,7 @@ const Form: FC<Props> = ({ children, inputs, submitButtonProps, onSubmit }) => {
           placeholder={input.label}
           secureTextEntry={input.inputProps.autoCompleteType === 'password'}
           errorMessage={inputError}
+          errorStyle={{ color: 'red' }}
           value={input.inputProps.value || ''}
           onChange={(e) =>
             formDispatch({

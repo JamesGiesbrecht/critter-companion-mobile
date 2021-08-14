@@ -1,13 +1,15 @@
 import { RouteProp, useNavigation } from '@react-navigation/native'
-import React, { FC } from 'react'
-import { StyleSheet, KeyboardAvoidingView } from 'react-native'
+import React, { FC, useState } from 'react'
+
+import { StyleSheet, KeyboardAvoidingView, View } from 'react-native'
 import { Card, Text, Button } from 'react-native-elements'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import Form from 'src/components/common/Form'
 
+import Form from 'src/components/common/Form'
+import { useAuth } from 'src/context/Auth'
 import useTheme from 'src/hooks/useTheme'
-import { FormType } from 'src/typescript/enums'
-import { AuthStackParamList, InputCollection } from 'src/typescript/types'
+import { AuthError, FormType } from 'src/typescript/enums'
+import { AuthStackParamList, FormState, InputCollection } from 'src/typescript/types'
 
 type EmailScreenRouteProp = RouteProp<AuthStackParamList, 'Email'>
 
@@ -60,10 +62,68 @@ const EmailScreen: FC<Props> = ({ route }) => {
   const theme = useTheme()
   const navigation = useNavigation()
   const { type } = route.params
+  const { login, signUp } = useAuth()
+  const [submitError, setSubmitError] = useState<string>('')
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const handleSubmit = () => {
-    console.log('Submitting Email')
-    navigation.navigate('Root')
+  const handleSubmit = async (formState: FormState) => {
+    setIsLoading(true)
+    let result
+    const email = formState.inputs.email.inputProps.value || ''
+    const password = formState.inputs.password.inputProps.value || ''
+    try {
+      if (type === FormType.Login) {
+        result = await login(email, password)
+      } else if (type === FormType.SignUp) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        result = await signUp(email, password)
+      } else {
+        throw new Error(`Unhandled submission type: ${type}`)
+      }
+      navigation.navigate('Root')
+    } catch (error) {
+      let errorMessage
+      switch (error.code) {
+        case AuthError.InvalidEmail:
+          errorMessage = 'Please enter a valid email address.'
+          break
+        case AuthError.UserDisabled:
+          errorMessage = `The account associated with ${email} has been disabled. Contact support for help with this issue.`
+          break
+        case AuthError.UserNotFound:
+          errorMessage = 'An account with this email does not exist, did you mean to sign up?'
+          break
+        case AuthError.WrongPassword:
+          errorMessage =
+            'Incorrect password provided. Reset your password, or try signing in with another provider like Google.'
+          break
+        case AuthError.EmailAlreadyInUse:
+          errorMessage =
+            'An account already exists with this email, did you mean to login? An account may also already exist with another provider like Google.'
+          break
+
+        case AuthError.TooManyRequests:
+          errorMessage = 'You have made too many requests, try again later.'
+          break
+        case AuthError.OperationNotAllowed:
+        case AuthError.MissingContinueUri:
+        case AuthError.MissingIOSBundleId:
+        case AuthError.MissingAndroidPkgName:
+        case AuthError.InvalidContinueUri:
+        case AuthError.UnauthorizedContinueUri:
+          errorMessage =
+            'There is an error with the app configuration, please notify the administrator.'
+          break
+        case AuthError.WeakPassword:
+          errorMessage = error.message
+          break
+        default:
+          errorMessage = 'Something went wrong, try again later.'
+      }
+      setSubmitError(errorMessage)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -73,11 +133,17 @@ const EmailScreen: FC<Props> = ({ route }) => {
           <Text h1 style={styles.title}>
             {type === FormType.Login ? 'Sign In' : 'Sign Up'}
           </Text>
+          {!!submitError && (
+            <View style={styles.errorContainer}>
+              <Text style={styles.errorText}>{submitError}</Text>
+            </View>
+          )}
           <Form
             submitButtonProps={{
               containerStyle: styles.button,
               buttonStyle: { backgroundColor: theme.primary },
               title: type === FormType.Login ? 'Sign In' : 'Sign Up',
+              loading: isLoading,
             }}
             inputs={
               type === FormType.SignUp
@@ -106,6 +172,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignContent: 'center',
+  },
+  errorContainer: {
+    marginBottom: 30,
+  },
+  errorText: {
+    color: 'red',
   },
   title: {
     marginBottom: 20,
