@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "501051862820",
+    "firebase_url": "https://critter-companion-cfda6-default-rtdb.firebaseio.com",
+    "project_id": "critter-companion-cfda6",
+    "storage_bucket": "critter-companion-cfda6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:501051862820:android:0480f6d094474846524db1",
+        "android_client_info": {
+          "package_name": "app.crittercompanion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "501051862820-ab0289ef7l6ekn81maif830pu7ot8njm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQRQiyiZIkz8Kmkyul34BJhC7NjS3Ic4A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "501051862820-ab0289ef7l6ekn81maif830pu7ot8njm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "501051862820-d15v1ko6oc6ulfdu085slkd9virgb7sb.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.crittercompanion"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

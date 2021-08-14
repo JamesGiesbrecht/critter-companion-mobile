@@ -19,9 +19,18 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "app.crittercompanion",
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.501051862820-d15v1ko6oc6ulfdu085slkd9virgb7sb<"
+        }
+      },
+      "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true
     },
     "android": {
+      "package": "app.crittercompanion",
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
