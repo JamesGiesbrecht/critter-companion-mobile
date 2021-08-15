@@ -9,6 +9,7 @@ export type ENV = {
   FIREBASE_SENDER_ID: string
   FIREBASE_APP_ID: string
   FIREBASE_MEASUREMENT_ID: string
+  GOOGLE_WEB_CLIENT_ID: string
 }
 
 export type RootStackParamList = {

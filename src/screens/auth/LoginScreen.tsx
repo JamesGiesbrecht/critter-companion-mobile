@@ -1,5 +1,9 @@
 import React, { FC, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
+import { ResponseType } from 'expo-auth-session'
+import * as Google from 'expo-auth-session/providers/google'
+import * as WebBrowser from 'expo-web-browser'
+import firebase from 'firebase'
 import { useNavigation } from '@react-navigation/native'
 import { Button, Icon } from 'react-native-elements'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
@@ -8,6 +12,9 @@ import Centered from 'src/components/ui/Centered'
 import useTheme from 'src/hooks/useTheme'
 import { AccountType, FormType } from 'src/typescript/enums'
 import useStore from 'src/store'
+import env from 'src/constants/env'
+
+WebBrowser.maybeCompleteAuthSession()
 
 const LoginScreen: FC = () => {
   const insets = useSafeAreaInsets()
@@ -16,6 +23,10 @@ const LoginScreen: FC = () => {
   const [buttonType, setButtonType] = useState<FormType>(FormType.SignUp)
   const accountType = useStore((state) => state.accountType)
   const setAccountType = useStore((state) => state.setAccountType)
+
+  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
+    clientId: env.GOOGLE_WEB_CLIENT_ID,
+  })
 
   const onSubmit = () => {
     console.log('Submitting Login', accountType)
@@ -26,9 +37,15 @@ const LoginScreen: FC = () => {
     setAccountType(AccountType.ONLINE_ACCOUNT)
     onSubmit()
   }
-  const handleLogInWithGoogle = () => {
-    setAccountType(AccountType.ONLINE_ACCOUNT)
-    onSubmit()
+  const handleLogInWithGoogle = async () => {
+    try {
+      const result = await promptAsync()
+      console.log(result)
+      setAccountType(AccountType.ONLINE_ACCOUNT)
+      // onSubmit()
+    } catch (e) {
+      console.log(e)
+    }
   }
   const handleLogInWithFacebook = () => {
     setAccountType(AccountType.ONLINE_ACCOUNT)
