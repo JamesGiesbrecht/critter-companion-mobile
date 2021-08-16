@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import firebase from 'firebase/app'
 import 'firebase/auth'
-// import 'firebase/database'
+import 'firebase/database'
+
 import ENV from 'src/constants/env'
 
 const {
@@ -27,4 +28,4 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 export const firebaseAuth = firebase.auth()
-// export const firebaseDb = firebase.database()
+export const firebaseDb = firebase.database()

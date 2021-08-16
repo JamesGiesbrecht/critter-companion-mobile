@@ -7,10 +7,12 @@ import {
 } from '@react-navigation/drawer'
 import { useNavigation } from '@react-navigation/native'
 
-import CritterBottomTabNavigator from 'src/navigation/CrittersBottomTabNavigator'
-import SettingsStack from 'src/navigation/stacks/SettingsStack'
+import { useAuth } from 'src/context/Auth'
 import useStore from 'src/store'
 import { AccountType } from 'src/typescript/enums'
+
+import CritterBottomTabNavigator from 'src/navigation/CrittersBottomTabNavigator'
+import SettingsStack from 'src/navigation/stacks/SettingsStack'
 
 const Drawer = createDrawerNavigator()
 
@@ -18,10 +20,12 @@ const DrawerNavigator = () => {
   const navigation = useNavigation()
   const accountType = useStore((state) => state.accountType)
   const setAccountType = useStore((state) => state.setAccountType)
+  const { logout } = useAuth()
 
   const handleLogout = () => {
     setAccountType(null)
     navigation.navigate('Auth')
+    return logout()
   }
 
   return (

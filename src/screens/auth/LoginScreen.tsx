@@ -1,35 +1,25 @@
 import React, { FC, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { ResponseType } from 'expo-auth-session'
-import * as Google from 'expo-auth-session/providers/google'
-import * as WebBrowser from 'expo-web-browser'
-import firebase from 'firebase'
 import { useNavigation } from '@react-navigation/native'
 import { Button, Icon } from 'react-native-elements'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
-import Centered from 'src/components/ui/Centered'
+import { useAuth } from 'src/context/Auth'
 import useTheme from 'src/hooks/useTheme'
-import { AccountType, FormType } from 'src/typescript/enums'
 import useStore from 'src/store'
-import env from 'src/constants/env'
+import { AccountType, FormType } from 'src/typescript/enums'
 
-WebBrowser.maybeCompleteAuthSession()
+import Centered from 'src/components/ui/Centered'
 
 const LoginScreen: FC = () => {
+  const { signInWithGoogle } = useAuth()
   const insets = useSafeAreaInsets()
   const theme = useTheme()
   const navigation = useNavigation()
   const [buttonType, setButtonType] = useState<FormType>(FormType.SignUp)
-  const accountType = useStore((state) => state.accountType)
   const setAccountType = useStore((state) => state.setAccountType)
 
-  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    clientId: env.GOOGLE_WEB_CLIENT_ID,
-  })
-
   const onSubmit = () => {
-    console.log('Submitting Login', accountType)
     navigation.navigate('Root')
   }
 
@@ -39,12 +29,11 @@ const LoginScreen: FC = () => {
   }
   const handleLogInWithGoogle = async () => {
     try {
-      const result = await promptAsync()
-      console.log(result)
+      await signInWithGoogle()
       setAccountType(AccountType.ONLINE_ACCOUNT)
-      // onSubmit()
+      onSubmit()
     } catch (e) {
-      console.log(e)
+      console.log('AUTH ERROR', e)
     }
   }
   const handleLogInWithFacebook = () => {
