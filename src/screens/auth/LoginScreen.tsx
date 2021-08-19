@@ -36,10 +36,10 @@ const LoginScreen: FC = () => {
       console.log('AUTH ERROR', e)
     }
   }
-  const handleLogInWithFacebook = () => {
-    setAccountType(AccountType.ONLINE_ACCOUNT)
-    onSubmit()
-  }
+  // const handleLogInWithFacebook = () => {
+  //   setAccountType(AccountType.ONLINE_ACCOUNT)
+  //   onSubmit()
+  // }
   const handleLogInWithEmail = () => {
     setAccountType(AccountType.ONLINE_ACCOUNT)
     navigation.navigate('Email', { type: buttonType })
@@ -72,13 +72,13 @@ const LoginScreen: FC = () => {
           icon={<Icon iconStyle={styles.buttonIcon} name="google" type="antdesign" />}
           onPress={handleLogInWithGoogle}
         />
-        <Button
+        {/* <Button
           containerStyle={styles.button}
           buttonStyle={{ backgroundColor: '#3F5AA8' }}
           title={getButtonText('Facebook')}
           icon={<Icon iconStyle={styles.buttonIcon} name="facebook" type="font-awesome" />}
           onPress={handleLogInWithFacebook}
-        />
+        /> */}
         <Button
           containerStyle={styles.button}
           buttonStyle={{ backgroundColor: theme.primary }}
