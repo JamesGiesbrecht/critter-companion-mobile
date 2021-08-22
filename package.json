@@ -7,13 +7,16 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "test": "jest --watchAll",
-    "lint": "eslint ./ --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint ./ --ext .js,.jsx,.ts,.tsx",
+    "link:utility": "yarn link \"@james-giesbrecht/critter-companion-utility\"",
+    "unlink:utility": "yarn unlink \"@james-giesbrecht/critter-companion-utility\" && yarn install --force"
   },
   "jest": {
     "preset": "jest-expo"
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
+    "@james-giesbrecht/critter-companion-utility": "^0.0.3",
     "@react-native-async-storage/async-storage": "^1.13.0",
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/bottom-tabs": "5.11.2",
