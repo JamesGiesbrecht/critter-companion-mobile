@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { Alert, StyleSheet, View } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { Button, Icon } from 'react-native-elements'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context'
 
 import { useAuth } from 'src/context/Auth'
 import useTheme from 'src/hooks/useTheme'
@@ -12,7 +12,7 @@ import { AccountType, FormType } from 'src/typescript/enums'
 import Centered from 'src/components/ui/Centered'
 
 const LoginScreen: FC = () => {
-  const { signInWithGoogle } = useAuth()
+  const { signInWithGoogle, anonymousSignUp } = useAuth()
   const insets = useSafeAreaInsets()
   const theme = useTheme()
   const navigation = useNavigation()
@@ -24,29 +24,34 @@ const LoginScreen: FC = () => {
   }
 
   const handleLogInWithApple = () => {
-    setAccountType(AccountType.ONLINE_ACCOUNT)
-    onSubmit()
+    Alert.alert('Enroll in the Apple Developer Program to begin working on this feature')
   }
+
   const handleLogInWithGoogle = async () => {
     try {
       await signInWithGoogle()
       setAccountType(AccountType.ONLINE_ACCOUNT)
       onSubmit()
     } catch (e) {
+      Alert.alert('', e.toString())
       console.log('AUTH ERROR', e)
     }
   }
-  // const handleLogInWithFacebook = () => {
-  //   setAccountType(AccountType.ONLINE_ACCOUNT)
-  //   onSubmit()
-  // }
+
   const handleLogInWithEmail = () => {
     setAccountType(AccountType.ONLINE_ACCOUNT)
     navigation.navigate('Email', { type: buttonType })
   }
-  const handleOfflineAccount = () => {
-    setAccountType(AccountType.LOCAL_ACCOUNT)
-    onSubmit()
+
+  const handleOfflineAccount = async () => {
+    try {
+      await anonymousSignUp()
+      setAccountType(AccountType.ONLINE_ACCOUNT)
+      onSubmit()
+    } catch (e) {
+      Alert.alert('', e.toString())
+      console.log('ANONYMOUS AUTH ERROR', e)
+    }
   }
 
   const handleToggleType = () =>
@@ -56,7 +61,7 @@ const LoginScreen: FC = () => {
     `${buttonType === FormType.Login ? 'Sign in' : 'Sign up'} with ${provider}`
 
   return (
-    <View style={styles.screen}>
+    <SafeAreaView style={styles.screen}>
       <Centered defaultView style={styles.screen}>
         <Button
           containerStyle={styles.button}
@@ -95,8 +100,8 @@ const LoginScreen: FC = () => {
         />
       </Centered>
       <Button
-        containerStyle={{ alignItems: 'center', paddingBottom: insets.bottom + 5 }}
-        buttonStyle={[styles.button, { backgroundColor: 'white' }]}
+        containerStyle={{ alignItems: 'center' }}
+        buttonStyle={{ backgroundColor: 'white' }}
         titleStyle={{ color: 'black' }}
         title={
           buttonType === FormType.Login
@@ -105,7 +110,7 @@ const LoginScreen: FC = () => {
         }
         onPress={handleToggleType}
       />
-    </View>
+    </SafeAreaView>
   )
 }
 

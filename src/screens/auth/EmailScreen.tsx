@@ -161,6 +161,18 @@ const EmailScreen: FC<Props> = ({ route }) => {
           />
         </Card>
       </KeyboardAvoidingView>
+
+      <Button
+        containerStyle={{ alignItems: 'center' }}
+        buttonStyle={[styles.button, { backgroundColor: 'white' }]}
+        titleStyle={{ color: 'black' }}
+        title={
+          type === FormType.Login
+            ? "Don't have an account? Sign Up."
+            : 'Already have an account? Sign In.'
+        }
+        onPress={() => {}}
+      />
     </SafeAreaView>
   )
 }

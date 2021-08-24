@@ -1,10 +1,12 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import { Button } from 'react-native-elements/dist/buttons/Button'
+import { bugsData } from '@james-giesbrecht/critter-companion-utility'
+import { Button } from 'react-native-elements'
 
 import { useAuth } from 'src/context/Auth'
 import { firebaseDb } from 'src/firebase/config'
 
+import CritterList from 'src/components/critters/CritterList'
 import { Text } from 'src/components/Themed'
 import Centered from 'src/components/ui/Centered'
 
@@ -21,13 +23,12 @@ const BugsScreen = () => {
 
   return (
     <Centered>
-      <Text>Bugs</Text>
       <Button
         title="Get Donated"
         onPress={handleGetDonated}
         buttonStyle={{ backgroundColor: '#3F81EC' }}
       />
-      <Text>Bugs</Text>
+      <CritterList critters={bugsData} />
     </Centered>
   )
 }

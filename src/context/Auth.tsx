@@ -11,6 +11,7 @@ interface AuthContextType {
   login: typeof firebaseAuth.signInWithEmailAndPassword
   logout: typeof firebaseAuth.signOut
   signUp: typeof firebaseAuth.createUserWithEmailAndPassword
+  anonymousSignUp: typeof firebaseAuth.signInAnonymously
   resetPassword: typeof firebaseAuth.sendPasswordResetEmail
   signInWithGoogle: () => Promise<firebase.auth.UserCredential>
 }
@@ -24,6 +25,7 @@ export const AuthContext = createContext<AuthContextType>({
   login: noAuthProvider,
   logout: noAuthProvider,
   signUp: noAuthProvider,
+  anonymousSignUp: noAuthProvider,
   resetPassword: noAuthProvider,
   signInWithGoogle: noAuthProvider,
 })
@@ -61,6 +63,7 @@ export const AuthContextProvider: FC = ({ children }) => {
     login: firebaseAuth.signInWithEmailAndPassword.bind(firebaseAuth),
     logout: () => firebaseAuth.signOut(),
     signUp: firebaseAuth.createUserWithEmailAndPassword.bind(firebaseAuth),
+    anonymousSignUp: firebaseAuth.signInAnonymously.bind(firebaseAuth),
     resetPassword: firebaseAuth.sendPasswordResetEmail.bind(firebaseAuth),
     signInWithGoogle: handleSignInWithGoogle,
   }

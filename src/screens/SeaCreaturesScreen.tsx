@@ -1,18 +1,18 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
+import { seaData } from '@james-giesbrecht/critter-companion-utility'
 
-import { Text } from 'src/components/Themed'
+import CritterList from 'src/components/critters/CritterList'
 import Centered from 'src/components/ui/Centered'
 
 const SeaCreaturesScreen = () => {
   return (
-    <Centered>
-      <Text>Sea Creatures</Text>
+    <Centered defaultView>
+      <CritterList critters={seaData} />
     </Centered>
   )
 }
 
 export default SeaCreaturesScreen
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const styles = StyleSheet.create({})
