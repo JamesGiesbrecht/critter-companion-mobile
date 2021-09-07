@@ -1,7 +1,10 @@
 import React, { FC } from 'react'
 import { StyleSheet, Dimensions } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 import { BaseCritter } from '@james-giesbrecht/critter-companion-utility'
 import { Button, ListItem } from 'react-native-elements'
+
+import BlathersIcon from 'src/components/icons/BlathersIcon'
 
 const { width } = Dimensions.get('window')
 
@@ -15,7 +18,7 @@ const CritterRow: FC<Props> = ({ critter }) => (
     leftContent={
       <Button
         title="Donated"
-        icon={{ name: 'info', color: 'white' }}
+        icon={<BlathersIcon size={22} color="white" />}
         buttonStyle={{ minHeight: '100%' }}
       />
     }>

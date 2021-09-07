@@ -38,6 +38,7 @@ module.exports = {
   plugins: ['react', '@typescript-eslint', 'jest', 'prettier'],
   rules: {
     'arrow-body-style': 'off',
+    'global-require': 'off',
     'import/extensions': 'off',
     'import/prefer-default-export': 'off',
     'no-void': ['error', { allowAsStatement: true }],

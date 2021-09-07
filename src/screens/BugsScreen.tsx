@@ -28,7 +28,7 @@ const BugsScreen = () => {
         onPress={handleGetDonated}
         buttonStyle={{ backgroundColor: '#3F81EC' }}
       />
-      <CritterList critters={bugsData} />
+      <CritterList critters={bugsData.slice(0, 20)} />
     </Centered>
   )
 }
